@@ -135,12 +135,44 @@ You can enter questions and answers into a QnA Maker knowledge base manually, or
 1. Set up your Twitter Account
 2. Create [Twitter App] (https://apps.twitter.com/app/new)
 
-1. Fill in the details in **Applications Settings**
-1. Click **Save and retrain** to populate the knowledge base with questions and answers from the Web site whose URL you provided.
- 
-    ![Importing questions and answers from a URL](Images/qna-add-faq-url.png)
+1. Go back to **your bot tab**, fill in the details in **Applications Settings**
+1. Go to **the online code editor tab**, go to console
 
-    _Importing questions and answers from a URL_
+1. create **config.js**
+```
+require ('dotenv').config();
+
+module.exports = {
+	consumer_key: process.env.CONSUMER_KEY,
+	consumer_secret: process.env.CONSUMER_SECRET,
+	access_token: process.env.ACCESS_TOKEN,
+	access_token_secret: process.env.ACCESS_TOKEN_SECRET,	
+};
+```
+1. Finally, in the app.js file, set up twitbot (a Twit object that carries out the tweeting operations) configuring with the key information. Make sure you don’t call this just ‘bot’ – it will overlap with the ‘bot’ variable defined already.
+
+```
+var Twit = require('twit');
+var config = require('./config');
+var twitbot = new Twit(config);
+```
+
+```
+.matches('Greeting', (session, args) => {
+    session.send("If you can't think of anything more interesting to say than '%s' don't message me!",
+        session.message.text);
+    twitbot.post('statuses/update', {
+        status: 'hello world sent from Azure!'    
+    }, (err, data, response) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('${data.text} tweeted!');
+        }
+    });
+})
+```
+
 
 1. Click **Knowledge Base** and confirm that six new questions and answers were added. Then click **Save and retrain** to save the changes.
 
