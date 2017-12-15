@@ -1,9 +1,3 @@
-
-
-Step 1: Create Azure Account at https://azure.microsoft.com/
-Step 2: Create Your First Bot, go to https://portal.azure.com/
-
-
 <a name="HOLTitle"></a>
 # Building Intelligent Bots with the Microsoft Bot Framework #
 
@@ -33,6 +27,8 @@ In this hands-on lab, you will learn how to:
 The following are required to complete this hands-on lab:
 
 - An active Microsoft Azure subscription. If you don't have one, [sign up for a free trial](http://aka.ms/WATK-FreeTrial).
+- Twitter Account 
+
 
 ---
 
@@ -54,7 +50,7 @@ Estimated time to complete this lab: **60** minutes.
 
 The first step in creating a bot is to provide a location for the bot to be hosted, as well as configuring the services that the bot will use. [Azure Web Apps](https://azure.microsoft.com/services/app-service/web/) are perfect for hosting bot applications, and the Azure Bot Service is designed to provision and connect these services for you. In this exercise, you will create and configure an Azure Bot Service.
 
-1. Open the [Azure Portal](https://portal.azure.com) in your browser. If you are asked to sign in, do so using your Microsoft account.
+1. Open the [Azure Portal](https://portal.azure.com) in your browser (Chrome works best). If you are asked to sign in, do so using your Microsoft account.
 
 1. Click **+ New**, followed by **AI + Cognitive Services** and then **Web App Bot**.
  
@@ -66,6 +62,9 @@ The first step in creating a bot is to provide a location for the bot to be host
     ![Configuring a new Azure Bot Service](Images/bot-template-node-luis.png)
 
     _Configuring a new Azure Bot Service_
+
+1. Fill out everything else, click **Create**, wait for the bot to deploy 
+(if Ajax error, refresh the page and repeat from Step 1)
   
 1. Click **Resource Groups** in the 
 2.  on the left, followed by **BotsResourceGroup** to open the resource group created for the Bot Service.
@@ -119,43 +118,61 @@ In this exercise, you will modify the bot responses.
   ```
   
   ^ denotes the start of a sentence, and ‘i' indicates that the search should be case-insensitive. These are called regular expressions, often used in text search and text replacement. The bot replies to you using session.message.text which contains your utterance.
+  
+1. Change the bot's response for other intents "Help", "Greeting", "Cancel"
 
-1. Click **Test**.
+1. Click **Test in Web Chat**.
  
     ![Opening the Test page](Images/qna-select-test-tab.png)
 
     _Opening the Test page_
 
-1. Type "hi" into the box at the bottom of the chat window and press **Enter**. Confirm that the bot responds with "Welcome to the QnA Factbot!"
- 
-    ![Chatting with the bot](Images/qna-updated-chat-response.png)
-
-    _Chatting with the bot_
-
-This is a great start, but a simple reply to the greeting "hi" doesn't demonstrate a lot of value. To give your bot some meaningful content to work with, the next step is to populate the knowledge base with additional questions and answers.
-
 <a name="Exercise3"></a>
-## Exercise 3: Expand the QnA Maker knowledge base ##
+## Exercise 3: Send "Hello World" to Twitter ##
 
 You can enter questions and answers into a QnA Maker knowledge base manually, or you can import them from a variety of sources, including Web sites and local text files. In this exercise, you will use both of these techniques to populate the knowledge base with questions and answers and then publish the updated knowledge base for your bot to use.
 
-1. Click **Settings** to the return to the Settings page in the [Microsoft QnA Maker portal](https://qnamaker.ai/).
- 
-    ![Opening the Settings page](Images/qna-select-settings-tab.png)
+1. Set up your Twitter Account
+2. Create [Twitter App] (https://apps.twitter.com/app/new)
 
-    _Opening the Settings page_
+1. Go back to **your bot tab**, fill in the details in **Applications Settings**
+1. Go to **the online code editor tab**, go to console
 
-1. Paste the following URL into the **URLs** box:
+1. create **config.js**
+```
+require ('dotenv').config();
 
-	```
-	https://traininglabservices.azurewebsites.net/help/faqs.html
-	```
+module.exports = {
+	consumer_key: process.env.CONSUMER_KEY,
+	consumer_secret: process.env.CONSUMER_SECRET,
+	access_token: process.env.ACCESS_TOKEN,
+	access_token_secret: process.env.ACCESS_TOKEN_SECRET,	
+};
+```
+1. Finally, in the app.js file, set up twitbot (a Twit object that carries out the tweeting operations) configuring with the key information. Make sure you don’t call this just ‘bot’ – it will overlap with the ‘bot’ variable defined already.
 
-1. Click **Save and retrain** to populate the knowledge base with questions and answers from the Web site whose URL you provided.
- 
-    ![Importing questions and answers from a URL](Images/qna-add-faq-url.png)
+```
+var Twit = require('twit');
+var config = require('./config');
+var twitbot = new Twit(config);
+```
 
-    _Importing questions and answers from a URL_
+```
+.matches('Greeting', (session, args) => {
+    session.send("If you can't think of anything more interesting to say than '%s' don't message me!",
+        session.message.text);
+    twitbot.post('statuses/update', {
+        status: 'hello world sent from Azure!'    
+    }, (err, data, response) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('${data.text} tweeted!');
+        }
+    });
+})
+```
+
 
 1. Click **Knowledge Base** and confirm that six new questions and answers were added. Then click **Save and retrain** to save the changes.
 
