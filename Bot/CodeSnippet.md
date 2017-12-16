@@ -128,7 +128,7 @@ Go to [LUIS](https://www.luis.ai/applications/) to create new intent "Tweet", pu
 
 Put this at the bottom of app.js
 ```
-\\ Tweet Dialog
+// Tweet Dialog
 bot.dialog('/tweet', [
     function (session) {
         builder.Prompts.text(session, 'What would you like to tweet?');
