@@ -141,7 +141,7 @@ Once you create new intent, publish it several times!
 ### Step 4: Get Your Bot into Facebook Messenger ###
 
 Follow this tutorial to set up your Facebook App
-http://aihelpwebsite.com/Blog/EntryId/7/Creating-A-Facebook-Bot-Using-Microsoft-Bot-Framework
+[Creating A Facebook Bot Using Microsoft Bot Framework](http://aihelpwebsite.com/Blog/EntryId/7/Creating-A-Facebook-Bot-Using-Microsoft-Bot-Framework)
 
 Further References
 [Microsoft Bot Framework Documentation](https://docs.microsoft.com/en-us/bot-framework/)
