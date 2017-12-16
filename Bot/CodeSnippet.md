@@ -31,10 +31,10 @@ The following are required to complete this hands-on lab:
 
 
 ## Tutorials ##
-https://blogs.msdn.microsoft.com/uk_faculty_connection/2017/10/28/how-to-build-a-user-interactive-bot-with-microsoft-bot-framework/
-How to build a user interactive bot with Microsoft Bot Framework by Shu Ishida
 
-Code snippets are here
+[How to build a user interactive bot with Microsoft Bot Framework](https://blogs.msdn.microsoft.com/uk_faculty_connection/2017/10/28/how-to-build-a-user-interactive-bot-with-microsoft-bot-framework/) by Shu Ishida
+
+After Bot is created, code snippets are here
 
 ### Step 1: Change your bot response ###
 1. Make your Bot cocky
