@@ -57,7 +57,7 @@ After Bot is created, code snippets are here
   })
   ```
   
-  ^ denotes the start of a sentence, and ‘i' indicates that the search should be case-insensitive. These are called regular expressions, often used in text search and text replacement. The bot replies to you using session.message.text which contains your utterance.
+  **^** denotes the start of a sentence, and **i** indicates that the search should be case-insensitive. These are called regular expressions, often used in text search and text replacement. The bot replies to you using session.message.text which contains your utterance.
 
 <a name="Step2"></a>
 ### Step 2: Get your bot to tweet "Hello World!" ###
