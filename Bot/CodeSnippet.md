@@ -48,10 +48,12 @@ Code snippets are here
   ^ denotes the start of a sentence, and ‘i' indicates that the search should be case-insensitive. These are called regular expressions, often used in text search and text replacement. The bot replies to you using session.message.text which contains your utterance.
   
 ### Step 2: Get your bot to tweet "Hello World!" ###
-2. Go to **the online code editor tab**, go to console, type
+
+1. Go to **the online code editor tab**, go to console, type
 ```
 npm install --save dotenv twit
 ```
+
 1. Create a **.env** file
 Add
 ```
@@ -72,6 +74,7 @@ module.exports = {
 	access_token_secret: process.env.ACCESS_TOKEN_SECRET,	
 };
 ```
+
 1. Finally, in the app.js file, set up twitbot (a Twit object that carries out the tweeting operations) configuring with the key information. Make sure you don’t call this just ‘bot’ – it will overlap with the ‘bot’ variable defined already.
 
 ```
