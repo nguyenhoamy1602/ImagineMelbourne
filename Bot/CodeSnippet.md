@@ -36,6 +36,7 @@ How to build a user interactive bot with Microsoft Bot Framework by Shu Ishida
 
 Code snippets are here
 
+### Step 1: Change your bot response ###
 1. Make your Bot cocky
   ```
   .matches(/^hey/i, (session, args) => {
@@ -46,7 +47,8 @@ Code snippets are here
   
   ^ denotes the start of a sentence, and ‘i' indicates that the search should be case-insensitive. These are called regular expressions, often used in text search and text replacement. The bot replies to you using session.message.text which contains your utterance.
   
-1. Go to **the online code editor tab**, go to console, type
+### Step 2: Get your bot to tweet "Hello World!" ###
+2. Go to **the online code editor tab**, go to console, type
 ```
 npm install --save dotenv twit
 ```
@@ -93,6 +95,43 @@ var twitbot = new Twit(config);
         }
     });
 })
+```
+
+### Step 3: Get Your Bot to Tweet What You Want ###
+```
+.matches('Tweet', (session, args) => {
+    session.send("OK, I'll connect you to your Twitter account");
+    session.beginDialog('/tweet');
+})
+
+```
+
+Put this at the bottom of app.js
+```
+\\ Tweet Dialog
+bot.dialog('/tweet', [
+    function (session) {
+        builder.Prompts.text(session, 'What would you like to tweet?');
+    },
+    function (session, results, next) {
+        session.send("Got it! I'll tweet '%s'", results.response);
+        twitbot.post('statuses/update', {
+            status: results.response
+        }, (err, data, response) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('${data.text} tweeted!');
+        }
+    });
+    session.endDialog("Now your tweet is live!");
+    }
+]).cancelAction('cancelAction', 'OK, cancelled tweet.', {
+    matches: /^nvm$|^nevermind$|^cancel$|^cancel.*tweet|^quit$/i,
+    confirmPrompt: "Are you sure?"
+});
+```
+
 ```
 
 
