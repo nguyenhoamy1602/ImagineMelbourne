@@ -26,7 +26,7 @@ In this hands-on lab, you will learn how to:
 
 The following are required to complete this hands-on lab:
 
-- An active Microsoft Azure subscription. If you don't have one, [sign up for a free trial](http://aka.ms/WATK-FreeTrial).
+- Facebook Page and Developer Account
 - Twitter Account 
 
 
@@ -54,7 +54,7 @@ Code snippets are here
 npm install --save dotenv twit
 ```
 
-1. Create a **.env** file
+2. Create a **.env** file
 Add
 ```
 CONSUMER_KEY = 
@@ -63,7 +63,7 @@ ACCESS_TOKEN =
 ACCESS_TOKEN_SECRET = 
 ```
 
-1. Create **config.js**
+3. Create **config.js**
 ```
 require ('dotenv').config();
 
@@ -75,7 +75,7 @@ module.exports = {
 };
 ```
 
-1. Finally, in the app.js file, set up twitbot (a Twit object that carries out the tweeting operations) configuring with the key information. Make sure you don’t call this just ‘bot’ – it will overlap with the ‘bot’ variable defined already.
+4. Finally, in the app.js file, set up twitbot (a Twit object that carries out the tweeting operations) configuring with the key information. Make sure you don’t call this just ‘bot’ – it will overlap with the ‘bot’ variable defined already.
 
 ```
 var Twit = require('twit');
@@ -83,7 +83,7 @@ var config = require('./config');
 var twitbot = new Twit(config);
 ```
 
-1. Let’s append this to the response to ‘Greeting’ for the time being as shown below.
+5. Let’s append this to the response to ‘Greeting’ for the time being as shown below.
 ```
 .matches('Greeting', (session, args) => {
     session.send("If you can't think of anything more interesting to say than '%s' don't message me!",
@@ -135,8 +135,13 @@ bot.dialog('/tweet', [
 });
 ```
 
-```
 
 
 Once you create new intent, publish it several times!
+
+Follow this tutorial to set up your Facebook App
+http://aihelpwebsite.com/Blog/EntryId/7/Creating-A-Facebook-Bot-Using-Microsoft-Bot-Framework
+
+Further References
+[Microsoft Bot Framework Documentation](https://docs.microsoft.com/en-us/bot-framework/)
 
