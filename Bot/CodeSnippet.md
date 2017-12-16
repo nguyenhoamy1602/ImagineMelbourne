@@ -101,6 +101,10 @@ var twitbot = new Twit(config);
 ```
 
 ### Step 3: Get Your Bot to Tweet What You Want ###
+
+Go to [LUIS](https://www.luis.ai/applications/) to create new intent "Tweet", publish it several times!
+
+
 ```
 .matches('Tweet', (session, args) => {
     session.send("OK, I'll connect you to your Twitter account");
@@ -135,7 +139,7 @@ bot.dialog('/tweet', [
 });
 ```
 
-Once you create new intent, publish it several times!
+
 
 
 ### Step 4: Get Your Bot into Facebook Messenger ###
