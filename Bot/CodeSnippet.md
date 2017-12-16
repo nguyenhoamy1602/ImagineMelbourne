@@ -39,9 +39,13 @@ The following are required to complete this hands-on lab:
 After Bot is created, code snippets are here
 
 [Step 1: Change your bot response](#Step1)
+
 [Step 2: Get your bot to tweet "Hello World!”](#Step2)
+
 [Step 3: Get Your Bot to Tweet What You Want](#Step3)
+
 [Step 4: Get Your Bot into Facebook Messenger](#Step4)
+
 
 <a name="Step1"></a>
 ### Step 1: Change your bot response ###
