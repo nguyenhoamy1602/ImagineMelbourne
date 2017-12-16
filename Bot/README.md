@@ -40,7 +40,7 @@ This hands-on lab includes the following exercises:
 - [Exercise 1: Create an Azure Bot Service](#Exercise1)
 - [Exercise 2: Modify Bot Response](#Exercise2)
 - [Exercise 3: Send "Hello World" to Twitter](#Exercise3)
-- [Exercise 4: Create LUIS intent](#Exercise4)
+- [Exercise 4: Make the Bot Tweet What You Want](#Exercise4)
 - [Exercise 5: Set the Bot on Facebook](#Exercise5)
 
 Estimated time to complete this lab: **60** minutes.
@@ -133,12 +133,22 @@ In this exercise, you will modify the bot responses.
 You can enter questions and answers into a QnA Maker knowledge base manually, or you can import them from a variety of sources, including Web sites and local text files. In this exercise, you will use both of these techniques to populate the knowledge base with questions and answers and then publish the updated knowledge base for your bot to use.
 
 1. Set up your Twitter Account
-2. Create [Twitter App] (https://apps.twitter.com/app/new)
+2. Create [Twitter App](https://apps.twitter.com/app/new)
 
-1. Go back to **your bot tab**, fill in the details in **Applications Settings**
-1. Go to **the online code editor tab**, go to console
+1. Go to **the online code editor tab**, go to console, type
+```
+npm install --save dotenv twit
+```
+1. Create a **.env** file
+Add
+```
+CONSUMER_KEY = 
+CONSUMER_SECRET =
+ACCESS_TOKEN = 
+ACCESS_TOKEN_SECRET = 
+```
 
-1. create **config.js**
+1. Create **config.js**
 ```
 require ('dotenv').config();
 
@@ -157,6 +167,7 @@ var config = require('./config');
 var twitbot = new Twit(config);
 ```
 
+1. Let’s append this to the response to ‘Greeting’ for the time being as shown below.
 ```
 .matches('Greeting', (session, args) => {
     session.send("If you can't think of anything more interesting to say than '%s' don't message me!",
@@ -173,14 +184,11 @@ var twitbot = new Twit(config);
 })
 ```
 
-
-1. Click **Knowledge Base** and confirm that six new questions and answers were added. Then click **Save and retrain** to save the changes.
-
-    ![The updated knowledge base](Images/qna-updated-kb-01.png)
+    ![Twitter-config](Images/twitter-config-hello-world.png)
 
     _The updated knowledge base_
 
-1. Click **Test** to return to the Test page. Type "What's the largest city in the world?" into the box at the bottom of the chat window and press **Enter**. Confirm that the bot responds as shown below.
+1. Now everything is set up. Go to your online bot emulator and type in some greeting. After the bot responds, check your twitter account and, lo and behold! You have your first tweet!
  
     ![Testing the updated knowledge base](Images/qna-test-largest-city.png)
 
@@ -227,15 +235,9 @@ var twitbot = new Twit(config);
 With a sample knowledge base deployed, it is now time to lend attention to the bot itself.
 
 <a name="Exercise4"></a>
-## Exercise 4: Deploy the bot and set up continuous integration ##
+## Exercise 4: Make the Bot Tweet What You Want ##
 
-When you deployed a Bot Service in [Exercise 1](#Exercise1), an Azure Web App was created to host the bot. But the bot still needs to be written and deployed to the Azure Web app. In this exercise, you will code the bot using source code generated for you by QnA Maker. Then you will create a local Git repository for the code, connect it to the Azure Web App, and publish the bot to Azure, all using Visual Studio Code.
-
-1. If you haven't installed Visual Studio Code, take a moment to do so now. You can download Visual Studio Code from http://code.visualstudio.com. You should also install [Node.js](https://nodejs.org) and [Git Client](https://git-scm.com/downloads) if they aren't already installed. All of these products work cross-platform and can be installed on Windows, macOS, or Linux.
-
-	> An easy way to determine whether Node.js is installed is to open a terminal window or Command Prompt window and execute a **node -v** command. If the Node.js version number is displayed, then Node.js is installed.
-
-1. Return to the Azure Portal and open the Bot Service you created in [Exercise 1](#Exercise1) if it isn't already open.
+1. Create Intent in [LUIS](https://www.luis.ai/applications/)
 
     ![Opening the Bot Service](Images/portal-click-bot-service.png)
 
