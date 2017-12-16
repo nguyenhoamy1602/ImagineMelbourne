@@ -54,8 +54,8 @@ Code snippets are here
 npm install --save dotenv twit
 ```
 
-2. Create a **.env** file
-Add
+2. Create a **.env** file, add in the information below. Add **.env** into **.gitignore**
+
 ```
 CONSUMER_KEY = 
 CONSUMER_SECRET =
