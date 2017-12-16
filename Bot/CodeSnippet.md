@@ -32,10 +32,18 @@ The following are required to complete this hands-on lab:
 
 ## Tutorials ##
 
+
+
 [How to build a user interactive bot with Microsoft Bot Framework](https://blogs.msdn.microsoft.com/uk_faculty_connection/2017/10/28/how-to-build-a-user-interactive-bot-with-microsoft-bot-framework/) by Shu Ishida
 
 After Bot is created, code snippets are here
 
+[Step 1: Change your bot response](#Step1)
+[Step 2: Get your bot to tweet "Hello World!”](#Step2)
+[Step 3: Get Your Bot to Tweet What You Want](#Step3)
+[Step 4: Get Your Bot into Facebook Messenger](#Step4)
+
+<a name="Step1"></a>
 ### Step 1: Change your bot response ###
 1. Make your Bot cocky
   ```
@@ -46,7 +54,8 @@ After Bot is created, code snippets are here
   ```
   
   ^ denotes the start of a sentence, and ‘i' indicates that the search should be case-insensitive. These are called regular expressions, often used in text search and text replacement. The bot replies to you using session.message.text which contains your utterance.
-  
+
+<a name="Step2"></a>
 ### Step 2: Get your bot to tweet "Hello World!" ###
 
 1. Go to **the online code editor tab**, go to console, type
@@ -99,7 +108,7 @@ var twitbot = new Twit(config);
     });
 })
 ```
-
+<a name="Step3"></a>
 ### Step 3: Get Your Bot to Tweet What You Want ###
 
 Go to [LUIS](https://www.luis.ai/applications/) to create new intent "Tweet", publish it several times!
@@ -140,8 +149,7 @@ bot.dialog('/tweet', [
 ```
 
 
-
-
+<a name="Step4"></a>
 ### Step 4: Get Your Bot into Facebook Messenger ###
 
 Follow this tutorial to set up your Facebook App
